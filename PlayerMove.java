@@ -2,6 +2,11 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+//==================================================================================
+//PlayerMove()
+// This class controls the players and computers move. 
+// It also checks the 3-in-a-row combinations
+//==================================================================================
 
 public class PlayerMove extends GUI {
 
@@ -10,22 +15,19 @@ public class PlayerMove extends GUI {
 
 	boolean usrwin = false;
 	boolean compwin = false;
-	
-	public PlayerMove(int x, int y){
+
+	public PlayerMove(int x, int y) {
 		this.setLocation(x, y);
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) { // This is invoked when a
 													// button is pressed
 		count++; // Counts the number of presses
-		//system.out.println("Go");
 
 		for (int i = 0; i <= 8; i++) {
 
 			if (button[i] == e.getSource()) {
-
-				//system.out.println("Your turn");
 
 				button[i].setText("X");
 				button[i].setEnabled(false);
@@ -43,7 +45,6 @@ public class PlayerMove extends GUI {
 																// number from 1
 																// to 9 for each
 																// slot
-					//system.out.println(comp);
 
 					if (button[comp - 1].isEnabled() == true) { // If a button
 																// is available,
@@ -63,9 +64,12 @@ public class PlayerMove extends GUI {
 			}
 
 		}
-		// sign++;
+
 	}
 
+	// ==================================================================================
+	// Checks the three in a row combinations
+	// ==================================================================================
 	public void winner() {
 
 		if ((CheckWin.check(button[0], button[1], button[2])
@@ -161,6 +165,9 @@ public class PlayerMove extends GUI {
 			ShowUserWin();
 			endGame();
 		}
+
+		// Checks to see if there is a cats game
+
 		if ((usrwin == false) && (compwin == false)
 				&& (button[0].isEnabled() == false)
 				&& (button[1].isEnabled() == false)
@@ -171,30 +178,40 @@ public class PlayerMove extends GUI {
 				&& (button[6].isEnabled() == false)
 				&& (button[7].isEnabled() == false)
 				&& (button[8].isEnabled() == false)) {
-			
+
 			ShowCatsGame();
 
 		}
 		;
 
-		//system.out.println("User win " + usrwin + " : Comp win " + compwin);
-		
-		if(Game.done ==9){
-		
+		// Exits the game if the user has finished playing on the 9 tables
+
+		if (Game.done == 9) {
+
 			Game.gameover();
 			System.exit(0);
-			
+
 		}
-		//system.out.println("DOne = "+ Game.done);
 
 	}
 
+	// ==================================================================================
+
+	// ==================================================================================
+	// Ends the game for each individual table by disabling the buttons
+	// ==================================================================================
 	public void endGame() {
 		check = 1;
 		for (int i = 0; i <= button.length - 1; i++) {
 			button[i].setEnabled(false);
 		}
 	}
+
+	// ==================================================================================
+	// The following three methods add to the list of computer, user, or cats
+	// games. They
+	// also display a message.
+	// ==================================================================================
 
 	public void ShowUserWin() {
 		;
@@ -204,7 +221,7 @@ public class PlayerMove extends GUI {
 		Game.done++;
 		usrwin = true;
 		JOptionPane.showMessageDialog(null, "You got three in a row!");
-		
+
 		Game.score();
 
 	}
@@ -216,17 +233,17 @@ public class PlayerMove extends GUI {
 		Game.done++;
 		compwin = true;
 		JOptionPane.showMessageDialog(null, "Computer got three in a row!");
-		
+
 		Game.score();
 
 	}
-	
-	public void ShowCatsGame(){
+
+	public void ShowCatsGame() {
 		JOptionPane.showMessageDialog(null, "Cats Game!");
 		Game.catgamescore.add(1);
 		Game.usrwinscore.add(0);
 		Game.compwinscore.add(0);
 		Game.done++;
-		
+
 	}
 }
