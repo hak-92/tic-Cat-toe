@@ -244,6 +244,8 @@ public class PlayerMove extends GUI {
 		Game.usrwinscore.add(0);
 		Game.compwinscore.add(0);
 		Game.done++;
+		
+		Game.score();
 
 	}
 }
