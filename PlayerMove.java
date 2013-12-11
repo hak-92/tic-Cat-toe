@@ -15,6 +15,8 @@ public class PlayerMove extends GUI {
 
 	boolean usrwin = false;
 	boolean compwin = false;
+	
+	int loop =0;
 
 	public PlayerMove(int x, int y) {
 		this.setLocation(x, y);
@@ -71,99 +73,104 @@ public class PlayerMove extends GUI {
 	// Checks the three in a row combinations
 	// ==================================================================================
 	public void winner() {
+		
+	
 
-		if ((CheckWin.check(button[0], button[1], button[2])
+		 if ((CheckWin.check(button[0], button[1], button[2])
 				.equals("Computer Wins"))) {
 
 			ShowComWin();
-			endGame();
+			endGame(); return;
+		
+			
 
 		}
 
 		if ((CheckWin.check(button[0], button[1], button[2])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 
 		}
 
 		if ((CheckWin.check(button[3], button[4], button[5])
 				.equals("Computer Wins"))) {
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 		if ((CheckWin.check(button[3], button[4], button[5])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 		}
 
 		if ((CheckWin.check(button[6], button[7], button[8])
 				.equals("Computer Wins"))) {
 
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 		if ((CheckWin.check(button[6], button[7], button[8])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 		}
 
 		if ((CheckWin.check(button[0], button[3], button[6])
 				.equals("Computer Wins"))) {
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 
 		if ((CheckWin.check(button[0], button[3], button[6])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 		}
 
 		if ((CheckWin.check(button[1], button[4], button[7])
 				.equals("Computer Wins"))) {
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 		if ((CheckWin.check(button[1], button[4], button[7])
 				.equals("User Wins"))) {
 			ShowUserWin();
 			endGame();
+			return;
 		}
 
 		if ((CheckWin.check(button[2], button[5], button[8])
 				.equals("Computer Wins"))) {
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 		if ((CheckWin.check(button[2], button[5], button[8])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 		}
 
 		if ((CheckWin.check(button[0], button[4], button[8])
 				.equals("Computer Wins"))) {
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 		if ((CheckWin.check(button[0], button[4], button[8])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 		}
 
 		if ((CheckWin.check(button[2], button[4], button[6])
 				.equals("Computer Wins"))) {
 			ShowComWin();
-			endGame();
+			endGame(); return;
 		}
 		if ((CheckWin.check(button[2], button[4], button[6])
 				.equals("User Wins"))) {
 			ShowUserWin();
-			endGame();
+			endGame(); return;
 		}
 
 		// Checks to see if there is a cats game
@@ -180,9 +187,12 @@ public class PlayerMove extends GUI {
 				&& (button[8].isEnabled() == false)) {
 
 			ShowCatsGame();
+			endGame();
+			return;
 
 		}
-		;
+	
+		
 
 		// Exits the game if the user has finished playing on the 9 tables
 
@@ -214,7 +224,7 @@ public class PlayerMove extends GUI {
 	// ==================================================================================
 
 	public void ShowUserWin() {
-		;
+		
 		Game.usrwinscore.add(1);
 		Game.compwinscore.add(0);
 		Game.catgamescore.add(0);
@@ -227,8 +237,8 @@ public class PlayerMove extends GUI {
 	}
 
 	public void ShowComWin() {
-		Game.compwinscore.add(1);
 		Game.usrwinscore.add(0);
+		Game.compwinscore.add(1);
 		Game.catgamescore.add(0);
 		Game.done++;
 		compwin = true;
@@ -240,10 +250,13 @@ public class PlayerMove extends GUI {
 
 	public void ShowCatsGame() {
 		JOptionPane.showMessageDialog(null, "Cats Game!");
-		Game.catgamescore.add(1);
 		Game.usrwinscore.add(0);
 		Game.compwinscore.add(0);
+		Game.catgamescore.add(1);
 		Game.done++;
+		
+		compwin = false;
+		usrwin =false;
 		
 		Game.score();
 
